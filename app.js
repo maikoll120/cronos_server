@@ -2,8 +2,10 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+require("dotenv").config();
 
 // Local modules
+require("./src/util/db");
 const routes = require("./src/routes");
 const errorHandler = require("./src/middlewares/errorHandler");
 

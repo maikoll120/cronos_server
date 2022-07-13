@@ -5,6 +5,10 @@ const router = express.Router();
 const categoryController = require("../controllers/category.controller");
 
 // GET listing
-router.get("/find", categoryController.find);
+router.get("/", categoryController.findAll);
+router.get("/:id", categoryController.findById);
+
+// POST listing
+router.post("/", categoryController.create);
 
 module.exports = router;
