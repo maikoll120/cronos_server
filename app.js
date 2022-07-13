@@ -1,20 +1,26 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// Local modules
+const routes = require("./src/routes");
+const errorHandler = require("./src/middlewares/errorHandler");
 
-var app = express();
+// Express app
+const app = express();
 
-app.use(logger('dev'));
+// Middlewares
+app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "src/public")));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// Routes
+routes(app);
+
+// Error handler
+app.use(errorHandler);
 
 module.exports = app;
