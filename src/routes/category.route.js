@@ -11,4 +11,10 @@ router.get("/:id", categoryController.findById);
 // POST listing
 router.post("/", categoryController.create);
 
+// PUT listing
+router.put("/:id", categoryController.update);
+
+// DELETE listing
+router.delete("/:id", categoryController.remove);
+
 module.exports = router;

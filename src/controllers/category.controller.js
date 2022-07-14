@@ -34,8 +34,32 @@ async function create(req, res, next) {
   }
 }
 
+// Update
+async function update(req, res, next) {
+  try {
+    await Category.findByIdAndUpdate(req.params.id, req.body);
+
+    res.send("Updated successfully!");
+  } catch (error) {
+    return next(error);
+  }
+}
+
+// Delete
+async function remove(req, res, next) {
+  try {
+    await Category.findByIdAndDelete(req.params.id);
+
+    res.send("Removed successfully!");
+  } catch (error) {
+    return next(error);
+  }
+}
+
 module.exports = {
   findAll,
   findById,
   create,
+  update,
+  remove
 };
