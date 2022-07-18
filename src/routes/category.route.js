@@ -15,6 +15,6 @@ router.post("/", categoryController.create);
 router.put("/:id", categoryController.update);
 
 // DELETE listing
-router.delete("/:id", categoryController.remove);
+router.delete("/:id", categoryController.delete);
 
 module.exports = router;
