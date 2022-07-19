@@ -1,10 +1,10 @@
-const Category = require("../models/Category");
+const Message = require("../models/Message");
 
 // Find all
 async function findAll(req, res, next) {
   try {
-    const categories = await Category.find().sort({ name: "asc" });
-    res.send(categories);
+    const messages = await Message.find().populate("category");
+    res.send(messages);
   } catch (error) {
     return next(error);
   }
@@ -13,8 +13,8 @@ async function findAll(req, res, next) {
 // Find by ID
 async function findById(req, res, next) {
   try {
-    const category = await Category.findById(req.params.id);
-    res.send(category);
+    const message = await Message.findById(req.params.id).populate("category");
+    res.send(message);
   } catch (error) {
     return next(error);
   }
@@ -23,8 +23,8 @@ async function findById(req, res, next) {
 // Create
 async function create(req, res, next) {
   try {
-    const category = new Category(req.body);
-    await category.save();
+    const message = new Message(req.body);
+    await message.save();
     res.send("Created successfully!");
   } catch (error) {
     return next(error);
@@ -34,7 +34,7 @@ async function create(req, res, next) {
 // Update
 async function update(req, res, next) {
   try {
-    await Category.findByIdAndUpdate(req.params.id, req.body);
+    await Message.findByIdAndUpdate(req.params.id, req.body);
     res.send("Updated successfully!");
   } catch (error) {
     return next(error);
@@ -44,7 +44,7 @@ async function update(req, res, next) {
 // Delete
 async function _delete(req, res, next) {
   try {
-    await Category.findByIdAndDelete(req.params.id);
+    await Message.findByIdAndDelete(req.params.id);
     res.send("Deleted successfully!");
   } catch (error) {
     return next(error);
