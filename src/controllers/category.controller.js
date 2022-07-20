@@ -3,7 +3,16 @@ const Category = require("../models/Category");
 // Find all
 async function findAll(req, res, next) {
   try {
-    const categories = await Category.find().sort({ name: "asc" });
+    let criteria = null;
+    const queryName = req.query.name;
+
+    if (queryName) {
+      criteria = {
+        name: { $regex: queryName, $options: "i" },
+      };
+    }
+
+    const categories = await Category.find(criteria).sort({ name: "asc" });
     res.send(categories);
   } catch (error) {
     return next(error);
