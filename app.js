@@ -3,6 +3,8 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
+const swaggerUi = require("swagger-ui-express");
+const yaml = require("yamljs");
 require("dotenv").config();
 
 // Local modules
@@ -23,6 +25,10 @@ app.use(cors());
 
 // Routes
 routes(app);
+
+// Swagger
+const swaggerDocument = yaml.load(path.join(__dirname, "swagger.yaml"));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Error handler
 app.use(errorHandler);
