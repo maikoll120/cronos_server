@@ -24,6 +24,15 @@ describe('GET /category', () => {
     const response = await request(app).get('/category').send()
     expect(response.body).toHaveLength(1)
   })
+
+  test('get a category named "New Year"', async () => {
+    Category.findById = jest.fn().mockReturnValueOnce({
+      name: 'New Year'
+    })
+
+    const response = await request(app).get('/category/123').send()
+    expect(response.body.name).toBe('New Year')
+  })
 })
 
 afterAll(() => {
