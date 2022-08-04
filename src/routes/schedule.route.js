@@ -1,20 +1,20 @@
-const express = require("express");
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 
 // Controllers
-const scheduleController = require("../controllers/schedule.controller");
+const scheduleController = require('../controllers/schedule.controller')
 
 // GET listing
-router.get("/", scheduleController.findAll);
-router.get("/:id", scheduleController.findById);
+router.get('/', scheduleController.findAll)
+router.get('/:id', scheduleController.findById)
 
 // POST listing
-router.post("/", scheduleController.create);
+router.post('/', scheduleController.create)
 
 // PUT listing
-router.put("/:id", scheduleController.update);
+router.put('/:id', scheduleController.update)
 
 // DELETE listing
-router.delete("/:id", scheduleController.delete);
+router.delete('/:id', scheduleController.delete)
 
-module.exports = router;
+module.exports = router

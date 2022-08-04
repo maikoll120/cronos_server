@@ -1,67 +1,67 @@
-const Schedule = require("../models/Schedule");
+const Schedule = require('../models/Schedule')
 
 // Find all
-async function findAll(req, res, next) {
+async function findAll (req, res, next) {
   try {
     const schedules = await Schedule.find()
       .populate({
-        path: "message",
+        path: 'message',
         populate: {
-          path: "category",
-        },
+          path: 'category'
+        }
       })
-      .populate("contact");
-    res.send(schedules);
+      .populate('contact')
+    res.send(schedules)
   } catch (error) {
-    return next(error);
+    return next(error)
   }
 }
 
 // Find by ID
-async function findById(req, res, next) {
+async function findById (req, res, next) {
   try {
     const schedule = await Schedule.findById(req.params.id)
       .populate({
-        path: "message",
+        path: 'message',
         populate: {
-          path: "category",
-        },
+          path: 'category'
+        }
       })
-      .populate("contact");
-    res.send(schedule);
+      .populate('contact')
+    res.send(schedule)
   } catch (error) {
-    return next(error);
+    return next(error)
   }
 }
 
 // Create
-async function create(req, res, next) {
+async function create (req, res, next) {
   try {
-    const schedule = new Schedule(req.body);
-    await schedule.save();
-    res.send("Created successfully!");
+    const schedule = new Schedule(req.body)
+    await schedule.save()
+    res.send('Created successfully!')
   } catch (error) {
-    return next(error);
+    return next(error)
   }
 }
 
 // Update
-async function update(req, res, next) {
+async function update (req, res, next) {
   try {
-    await Schedule.findByIdAndUpdate(req.params.id, req.body);
-    res.send("Updated successfully!");
+    await Schedule.findByIdAndUpdate(req.params.id, req.body)
+    res.send('Updated successfully!')
   } catch (error) {
-    return next(error);
+    return next(error)
   }
 }
 
 // Delete
-async function _delete(req, res, next) {
+async function _delete (req, res, next) {
   try {
-    await Schedule.findByIdAndDelete(req.params.id);
-    res.send("Deleted successfully!");
+    await Schedule.findByIdAndDelete(req.params.id)
+    res.send('Deleted successfully!')
   } catch (error) {
-    return next(error);
+    return next(error)
   }
 }
 
@@ -70,5 +70,5 @@ module.exports = {
   findById,
   create,
   update,
-  delete: _delete,
-};
+  delete: _delete
+}

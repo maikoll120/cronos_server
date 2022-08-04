@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema
 
 const scheduleSchema = new Schema(
   {
@@ -8,16 +8,16 @@ const scheduleSchema = new Schema(
     date: { type: Date, required: true },
     message: {
       type: Schema.Types.ObjectId,
-      ref: "Message",
+      ref: 'Message'
     },
     contact: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Contact",
-      },
-    ],
+        ref: 'Contact'
+      }
+    ]
   },
   { versionKey: false, timestamps: true }
-);
+)
 
-module.exports = mongoose.model("Schedule", scheduleSchema);
+module.exports = mongoose.model('Schedule', scheduleSchema)
