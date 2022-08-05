@@ -9,6 +9,7 @@ require('dotenv').config()
 
 // Local modules
 require('./src/helpers/db')
+const healthcheck = require('./src/helpers/healthcheck')
 const routes = require('./src/routes')
 const errorHandler = require('./src/middlewares/errorHandler')
 
@@ -22,6 +23,9 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'src/public')))
 app.use(cors())
+
+// Healthcheck
+app.use(healthcheck)
 
 // Routes
 routes(app)
