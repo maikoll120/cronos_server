@@ -1,4 +1,4 @@
-name: deploy
+name: Deploy App
 
 on:
   push:
@@ -15,7 +15,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Install dependencies
-        run: npm install
-      - name: Lint checker
+      - name: Install
+        run: npm ci
+      - name: Lint
         run: npm run lint
+      - name: Test
+        run: npm run test
